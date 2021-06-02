@@ -9,19 +9,19 @@ const measures = {
     humidity: 00,
 }
 
-// setInterval(() => {
-//     fetch("/measures")
-//         .then(data => data.json())
-//         .then(({temperature, pressure, wind ,moist,humidity}) => {
-//             measures.temperature = temperature;
-//             measures.humidity = humidity;
-//             measures.pressure = pressure;
-//             measures.moist = moist;
-//             measures.wind = wind; 
-//             render();
-//         })
-//         .catch(console.log)
-// }, 5000)
+setInterval(() => {
+    fetch("/measures")
+        .then(data => data.json())
+        .then(({temperature, pressure, wind ,moist,humidity}) => {
+            measures.temperature = temperature;
+            measures.humidity = humidity;
+            measures.pressure = pressure;
+            measures.moist = moist;
+            measures.wind = wind; 
+            render();
+        })
+        .catch(console.log)
+}, 5000)
 
 const Temperature = document.getElementById("Temperature");
 const Pressure = document.getElementById("Pressure");
@@ -78,83 +78,83 @@ const moistChart = new Chart(document.getElementById('moist-chart').getContext('
 const pressureChart = new Chart(document.getElementById('pressure-chart').getContext('2d'), options("pressure",'rgba(153, 102, 255, 1)'));
 
 
-// setInterval(() => {
-//     fetch("/history")
-//         .then(data => data.json())
-//         .then((history) => {
-//             // {temperature, pressure, wind ,moist,humidity}
-//             tempChart.data.datasets[0].data = history.map(h => {
-//                 return {y: h.temperature,x:h.time}
-//             })
-
-//             humidChart.data.datasets[0].data = history.map(h => {
-//                 return {y: h.humidity,x:h.time}
-//             })
-
-//             windChart.data.datasets[0].data = history.map(h => {
-//                 return {y: h.wind,x:h.time}
-//             })
-            
-//             moistChart.data.datasets[0].data = history.map(h => {
-//                 return {y: h.moist,x:h.time}
-//             })
-            
-//             pressureChart.data.datasets[0].data = history.map(h => {
-//                 return {y: h.pressure,x:h.time}
-//             })
-
-//             humidChart.update();
-//             tempChart.update();
-//             moistChart.update();
-//             pressureChart.update();
-//             windChart.update();
-//         })
-//         .catch(console.log)
-// }, 5000);
-
-
-
-
-let idx = 0;
 setInterval(() => {
+    fetch("/history")
+        .then(data => data.json())
+        .then((history) => {
+            // {temperature, pressure, wind ,moist,humidity}
+            tempChart.data.datasets[0].data = history.map(h => {
+                return {y: h.temperature,x:h.time}
+            })
 
-    const history = DataHistory.slice(0,idx);
-    idx++;
+            humidChart.data.datasets[0].data = history.map(h => {
+                return {y: h.humidity,x:h.time}
+            })
 
-    tempChart.data.datasets[0].data = history.map(h => {
-        return {y: h.temperature,x:h.time}
-    })
+            windChart.data.datasets[0].data = history.map(h => {
+                return {y: h.wind,x:h.time}
+            })
+            
+            moistChart.data.datasets[0].data = history.map(h => {
+                return {y: h.moist,x:h.time}
+            })
+            
+            pressureChart.data.datasets[0].data = history.map(h => {
+                return {y: h.pressure,x:h.time}
+            })
 
-    humidChart.data.datasets[0].data = history.map(h => {
-        return {y: h.humidity,x:h.time}
-    })
+            humidChart.update();
+            tempChart.update();
+            moistChart.update();
+            pressureChart.update();
+            windChart.update();
+        })
+        .catch(console.log)
+}, 5000);
 
-    windChart.data.datasets[0].data = history.map(h => {
-        return {y: h.wind,x:h.time}
-    })
+
+
+
+// let idx = 0;
+// setInterval(() => {
+
+//     const history = DataHistory.slice(0,idx);
+//     idx++;
+
+//     tempChart.data.datasets[0].data = history.map(h => {
+//         return {y: h.temperature,x:h.time}
+//     })
+
+//     humidChart.data.datasets[0].data = history.map(h => {
+//         return {y: h.humidity,x:h.time}
+//     })
+
+//     windChart.data.datasets[0].data = history.map(h => {
+//         return {y: h.wind,x:h.time}
+//     })
     
-    moistChart.data.datasets[0].data = history.map(h => {
-        return {y: h.moist,x:h.time}
-    })
+//     moistChart.data.datasets[0].data = history.map(h => {
+//         return {y: h.moist,x:h.time}
+//     })
     
-    pressureChart.data.datasets[0].data = history.map(h => {
-        return {y: h.pressure,x:h.time}
-    })
+//     pressureChart.data.datasets[0].data = history.map(h => {
+//         return {y: h.pressure,x:h.time}
+//     })
 
-    humidChart.update();
-    tempChart.update();
-    moistChart.update();
-    pressureChart.update();
-    windChart.update();
+//     humidChart.update();
+//     tempChart.update();
+//     moistChart.update();
+//     pressureChart.update();
+//     windChart.update();
 
     
-    const {temperature, pressure, wind ,moist,humidity} = DataHistory[idx] || {
-        temperature: 00,
-        pressure: 00,
-        wind: 00,
-        moist: 00,
-        humidity: 00,
-    };
-    render();
+//     const {temperature, pressure, wind ,moist,humidity} = DataHistory[idx] || {
+//         temperature: 00,
+//         pressure: 00,
+//         wind: 00,
+//         moist: 00,
+//         humidity: 00,
+//     };
+//     render();
 
-},5000);
+// },5000);
