@@ -53,8 +53,9 @@ h2 {
 }
 
 .charts {
-    display: flex;
+    display: grid;
     gap: 1rem;
-    flex-flow: column wrap;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-content: center;
 }
 
